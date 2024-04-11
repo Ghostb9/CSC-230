@@ -31,6 +31,7 @@ DEFAULT_FROM_EMAIL = 'webmaster@localhost'  # Adjust as necessary
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CSRF_TRUSTED_ORIGINS = ['https://*.loca.lt']
 
 ALLOWED_HOSTS = ['.loca.lt']
 

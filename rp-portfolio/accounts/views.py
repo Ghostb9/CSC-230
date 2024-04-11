@@ -1,3 +1,11 @@
+#########################
+#####
+##### VIEWS FOR ALL ACCOUNTS MADE
+#####
+#########################
+
+
+
 from django.contrib.auth import login
 from .forms import UserRegisterForm
 from django.core.mail import send_mail

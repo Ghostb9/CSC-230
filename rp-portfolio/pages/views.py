@@ -1,3 +1,9 @@
+#########################
+#####
+##### VIEWS FOR ALL HTML
+#####
+#########################
+
 #imports functions from django
 from django.shortcuts import render
 from .models import Post

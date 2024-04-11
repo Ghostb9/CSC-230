@@ -33,7 +33,7 @@ DEFAULT_FROM_EMAIL = 'webmaster@localhost'  # Adjust as necessary
 DEBUG = True
 CSRF_TRUSTED_ORIGINS = ['https://*.loca.lt']
 
-ALLOWED_HOSTS = ['.loca.lt']
+ALLOWED_HOSTS = ['*']
 
 STATIC_URL = '/static/'
 # Application definition

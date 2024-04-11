@@ -1,4 +1,8 @@
-# pages/urls.py
+#########################
+#####
+##### URLS FOR ALL HTML
+#####
+#########################
 
 from django.urls import path
 from pages import views

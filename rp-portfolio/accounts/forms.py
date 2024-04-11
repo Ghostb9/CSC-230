@@ -1,4 +1,8 @@
-# Inside your app's forms.py file
+#########################
+#####
+##### FORMS FOR ACCOUNTS
+#####
+########################## Inside your app's forms.py file
 
 from django import forms
 from django.contrib.auth.models import User

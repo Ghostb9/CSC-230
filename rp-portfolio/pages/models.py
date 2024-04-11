@@ -1,3 +1,10 @@
+#########################
+#####
+##### MODELS FOR ADMIN PAGE
+#####
+#########################
+
+
 from django.db import models
 
 #test model for edit site

@@ -32,6 +32,7 @@ DEFAULT_FROM_EMAIL = 'webmaster@localhost'  # Adjust as necessary
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 CSRF_TRUSTED_ORIGINS = ['https://*.loca.lt']
+# run this in Powershell for default domain: lt --port 8000 --subdomain chubby-geckos-taste
 
 ALLOWED_HOSTS = ['*']
 

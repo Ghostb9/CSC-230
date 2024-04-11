@@ -32,7 +32,7 @@ DEFAULT_FROM_EMAIL = 'webmaster@localhost'  # Adjust as necessary
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.loca.lt']
 
 STATIC_URL = '/static/'
 # Application definition

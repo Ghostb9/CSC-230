@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GCM-Prototype</title>
+    <style>
+        body, html {
+            background-color: #6dcff6;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .header {
+            position: relative;
+            height: 30vh; /* Adjust height as needed */
+            background-image: url('./.png'); /* Set the image as background */
+            background-size: cover; /* Make sure the background image covers the entire header */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            overflow: hidden; /* Prevent content from overflowing */
+        }
+
+        .home-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: #6dcff6;
+            background-image: url('HomeButton.png'); 
+            background-size: cover; 
+            background-repeat: no-repeat;
+            text-indent: -9999px;
+            color: transparent; /* Hide text */
+        }
+        .btn-vroom{
+            background-image: url('vroom.png'); 
+            background-size: cover; 
+            background-repeat: no-repeat;
+            text-indent: -9999px;
+            color: transparent;
+
+        }
+
+
+
+        .home-button:hover {
+            background-color: #9b51e0; 
+        }
+
+        .title-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px; /* Add padding to the box */
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+            border: 2px solid black; /* Black border */
+            z-index: 2; /* Ensure box is above the image */
+        }
+
+        .title {
+            font-size: 36px; 
+            color: #000; /* Text color */
+            text-align: center;
+            margin: 0; /* Remove default margin */
+        }
+
+        .frame {
+            background-color: white; /* Set background color to white */
+            padding: 30px; /* Add padding to create space inside the box */
+            border: 1px solid black; 
+            width: 70%; /* Adjust width as needed */
+            margin: 0 auto; /* Center horizontally */
+            margin-top: 20px; /* Add top margin to create space below header */
+        }
+
+        h2 {
+            font-weight: normal;
+            color: black;
+            font-size: 20px;
+        }
+        /* Hamburger Menu Styles */
+        .hamburger-menu .menu-icon {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .hamburger-menu .menu-icon div {
+            background-color: #333;
+            height: 2px;
+            width: 30px;
+        }
+
+        .menu-content {
+            display: none;
+            flex-direction: column;
+            background-color: #f9f9f9;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .menu-content a {
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .menu-content a:hover {
+            background-color: #ddd;
+        }
+        
+        .menu-content a, .dropdown-content a {
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        .menu-content a:hover, .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            padding-left: 20px;
+        }
+        .dropdown-click {
+            cursor: pointer;
+        }
+        
+        .dropdown-content.active {
+            display: flex;
+        }
+        .menu-content a.dropdown-toggle {
+            cursor: pointer; /* Makes it clear it's clickable */
+        }
+        /* Ensures nested menus are initially hidden */
+        .nested-menu {
+            display: none;
+            position: relative;
+            padding-left: 20px; /* Indent nested menu items for visual hierarchy */
+        }
+        .nested-menu a {
+            display: block; /* Ensure proper block layout */
+            padding: 5px 10px; /* Consistent padding */
+            color: #333; /* Text color */
+            text-decoration: none; /* Remove underlines */
+        }
+        .nested-menu a:hover {
+            background-color: #ddd; /* Hover background */
+        }
+        /* Style for second-level nested menus */
+        .sub-nested-menu {
+            display: none;
+            padding-left: 20px; /* Further indentation for sub-level items */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="google_translate_element"></div>
+    <div class="header">
+        <a href="homepage.html">
+            <div class="home-button"></div>
+        </a>
+        <div class="title-box">
+            <h1 class="title">Resources</h1> <!-- Title text inside the box -->
+        </div>
+    </div>
+    <div class="imgcontainer"></div>
+
+    <div class="hamburger-menu">
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="menu-content" id="menuContent">
+            <a class="dropdown-toggle" onclick="toggleDropdown('exhibitsDropdown')">Exhibits</a>
+            <div class="nested-menu" id="exhibitsDropdown">
+                <a class="dropdown-toggle" onclick="toggleDropdown('level1')">Level 1</a>
+                <div class="sub-nested-menu" id="level1">
+                    <a href="GlobalCafe.html">Global Cafe</a>
+                    <a href="GuestServices.html">Guest Services</a>
+                    <a href="Tugboats.html">Tugboats Tots</a>
+                    <a href="Kidsport.html">KidsPort</a>
+                </div>
+                <a class="dropdown-toggle" onclick="toggleDropdown('level2')">Level 2</a>
+                <div class="sub-nested-menu" id="level2">
+                    <a href="PartyPlace.html">Party Place</a>
+                    <a href="ArtSmart.html">Art Smart</a>
+                    <a href="EngineersWorkshop.html">Engineer's Workshop</a>
+                    <a href="Farm.html">Farm</a>
+                    <a href="Theater.html">Theater</a>
+                    <a href="OceanSandbox.html">Ocean Sandbox</a>
+                    <a href="Forts.html">Forts</a>
+                    <a href="TempExhibit.html">Temporary Exhibit</a>
+                    <a href="FamilyPlay.html">Family Play Project</a>
+                    <a href="Waters.html">Water's Journey</a>
+                    <a href="SafetyVillage.html">Safety Village</a>
+
+                    <!-- Add more Level 2 links here -->
+                </div>
+                <a class="dropdown-toggle" onclick="toggleDropdown('level3')">Level 3</a>
+                <div class="sub-nested-menu" id="level3">
+                    <a href="BigJohn.html">Big John</a>
+                    <a href="LearningCenter.html">Learning Center</a>
+                    
+
+                    <!-- Add more Level 3 links here -->
+                </div>
+            </div>
+            <!-- Other menu items here -->
+            <a href="Resources.html">Resources</a>
+            <a href="Play.html">Play</a>
+            <a class="dropdown-toggle" onclick="toggleDropdown('aboutDropdown')">About</a>
+            <div class="nested-menu" id="aboutDropdown">
+                <a href="https://glazermuseum.org/mission/">Mission + History</a>
+                <a href="https://glazermuseum.org/deai/">DEAI Statement</a> 
+                <a href="https://glazermuseum.org/contact/">Contact</a>
+            </div>
+            <a href="login.html">Login</a>
+            <!-- Add your "About" section here as previously -->
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var menu = document.getElementById('menuContent');
+            var menuIcon = document.querySelector('.menu-icon');
+    
+            function toggleMenu() {
+                // Toggle menu display on click
+                menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+            }
+    
+            menuIcon.onclick = function(event) {
+            
+                event.stopPropagation();
+                toggleMenu();
+            };
+    
+            document.addEventListener('click', function(event) {
+                var target = event.target;
+                // Check if the click is outside the menu and the menu is currently displayed
+                if (menu.style.display === 'flex' && !menu.contains(target) && !menuIcon.contains(target)) {
+                    // Close the menu
+                    menu.style.display = 'none';
+                }
+            });
+    
+            function toggleDropdown(dropdownId) {
+                var dropdown = document.getElementById(dropdownId);
+                if (dropdown) {
+                    // Toggle dropdown display
+                    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+                }
+            }
+    
+    
+            window.toggleDropdown = toggleDropdown;
+        });
+    </script>      
+    <div class="frame">
+        <!-- First frame content goes here -->
+        
+        <p>
+            <a href="www.vroom.org">Vroom</a><br>
+            Explore Vroom's collection of engaging activities designed to spark your child's curiosity and promote early learning development.
+        </p>
+        <p>
+            <a href="https://glazermuseum.org/visit">Plan your visit</a><br>
+            There’s something new to discover with each visit to Glazer Children’s Museum. Play pretend in your favorite signature exhibits and discover new worlds in our traveling exhibits.
+        </p>
+        <p>
+            <a href="https://glazermuseum.org/memberships/">Membership</a><br>
+            Support GCM by becoming a member today and enjoy a full year of imagination and discovery! 
+        </p>
+        <p>
+            <a href="https://glazermuseum.org/financialaccess/">Financial Access</a><br>
+            GCM believes that every child deserves a fun, safe, and inclusive space for imagination and discovery. Our financial access programs provide families and schools in need with access to museum admission, play sessions, field trips, and camps at little-to-no cost.
+        </p>
+        <p>
+            <a href="Feedback form.html">Feedback Form</a>
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>

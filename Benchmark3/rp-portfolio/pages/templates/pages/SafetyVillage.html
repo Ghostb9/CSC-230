@@ -1,0 +1,148 @@
+<!--#########################
+#####
+##### SAFETY VILLAGE PAGE
+#####
+#########################-->
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<script src="tosTracker.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GCM-Prototype</title>
+    <style>
+        /* Existing styles... */
+        body, html {
+            background-color: #6dcff6;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .header {
+            position: relative;
+            height: 250px; /* Adjust height as needed */
+            background-image: url('{% static "farm.jpeg" %}'); /* Set the image as background */
+            background-size: cover; /* Make sure the background image covers the entire header */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            overflow: hidden; /* Prevent content from overflowing */
+        }
+
+        .home-button {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: #6dcff6;
+            background-image: url('{% static "HomeButton.png" %}'); 
+            background-size: cover; 
+            background-repeat: no-repeat;
+            text-indent: -9999px;
+            color: transparent; /* Hide text */
+        }
+
+        .home-button:hover {
+            background-color: #9b51e0; 
+        }
+        /* New styles for image container */
+        .image-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            margin: 40px auto 0;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .image-container img.active {
+            opacity: 1;
+        }
+
+        .prev-btn,
+        .next-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="google_translate_element"></div>
+    <div class="header">
+        <a href="{% url 'home' %}">
+            <div class="home-button"></div>
+        </a>
+    </div>
+
+    <!-- New image container -->
+    <div class="image-container">
+        <img src="ExhibImages/farm.jpeg" class="active" alt="Image 1">
+        <img src="ExhibImages/pizza.jpg" alt="Image 2">
+        <img src="ExhibImages/hospital.jpg" alt="Image 3">
+        <img src="ExhibImages/publix.jpg" alt="Image 4">
+        <div class="prev-btn">&laquo;</div>
+        <div class="next-btn">&raquo;</div>
+    </div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- New JavaScript for image navigation -->
+    <script>
+        const images = document.querySelectorAll('.image-container img');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentIndex = 0;
+
+        function showImage(index) {
+            images.forEach(img => img.classList.remove('active'));
+            images[index].classList.add('active');
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!--#########################
+#####
+##### TYPES OF PLAY PAGE
+#####
+#########################-->
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GCM-Prototype</title>
+    <style>
+        body, html {
+            background-color: #6dcff6;
+            font-family: GCMBase, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .header {
+            position: relative;
+            height: 30vh; /* Adjust height as needed */
+            background-image: url({% static 'Play.png'%} ); /* Set the image as background */
+            background-size: cover; /* Make sure the background image covers the entire header */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            overflow: hidden; /* Prevent content from overflowing */
+        }
+
+        .home-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid white;
+            padding: 10px;
+            background-color: #6dcff6;
+            background-image:url('{% static "HomeButton.png" %}'); 
+            background-size: cover; 
+            background-repeat: no-repeat;
+            text-indent: -9999px;
+            color: transparent; /* Hide text */
+        }
+
+        .home-button:hover {
+            background-color: #9b51e0; 
+        }
+
+        .title-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px; /* Add padding to the box */
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+            border: 2px solid white; /* Black border */
+            z-index: 2; /* Ensure box is above the image */
+        }
+
+        .title {
+            font-size: 36px; 
+            color: #000; /* Text color */
+            text-align: center;
+            margin: 0; /* Remove default margin */
+        }
+
+        .frame {
+            background-color: white; /* Set background color to white */
+            padding: 30px; /* Add padding to create space inside the box */
+            border: 1px solid white; 
+            width: 70%; /* Adjust width as needed */
+            margin: 0 auto; /* Center horizontally */
+            margin-top: 20px; /* Add top margin to create space below header */
+        }
+        
+        .image {
+            text-align: right;
+            
+        }
+       
+       
+        h2 {
+        font-weight: normal;
+        color: black;
+        font-size: 20 px;
+        }
+    
+        h3 {
+        font-weight: normal;
+        color: black;
+        font-size: 15px;
+        }
+
+        h4 {
+        font-weight: normal;
+        color: black;
+        font-size: 10px;
+        }
+    
+
+       
+
+    </style>
+</head>
+
+<body>
+    <div id="google_translate_element"></div>
+    <div class="header">
+        <a href="{% url 'home' %}">
+            <div class="home-button"></div>
+        </a>
+        <div class="title-box">
+            <h1 class="title">Play </h1> <!-- Title text inside the box -->
+        </div>
+    </div>
+    
+    <div class="frame">
+        <h2> What Do We Learn From Play?</h2>
+        <h3> 
+            Function Skills (focus, adaptation, moderation,
+            emotions) <br>
+
+            Social skills (communication) <br>
+
+            Problem solving (conflict resolution) <br>
+
+            Critical thinking (open mindedness, collaboration,
+            questioning) <br>
+
+            Growth mindset (failing forward) <br>
+
+            Resilience (confidence, sticking to it)
+            Self regulation (managing emotions)
+            
+            <div class ="image">
+                
+            <img src="{% static 'ChildPlay.png' %}" alt="Child Play Image">
+        </h3> 
+    </div>
+        
+
+    </div>
+    <div class="frame">
+        <h2>Types of Play at the Museum <br></h2>
+        <h3> Physical </h3>
+        <h4> Explore <a href = "{% url 'Publix' %}" target="_top">Publix</a>, <a href="{% url 'TugBoats' %}" target="_top">Tugboat Tots</a>
+        <h3> Socio-Emotional </h3>
+        <h4> Explore <a href="{% url 'Theater' %}" target="_top">Theater</a>, <a href="{% url 'ArtSmart' %}" target="_top">ArtSmart</a> </h4>
+        <h3>Sensory</h3>
+        <h4>Explore <a href="{% url 'Vet' %}" target="_top">Vet</a>, <a href="{% url 'PizzaPlace' %}" target="_top">Pizza Place</a> </h4>
+        <h3>Cognitive</h3>
+        <h4>Explore <a href="{% url 'Waters' %}" target="_top">Waters' Journey</a>, <a href="{% url 'Firehouse' %}" target="_top">Fire House</a> </h4>
+        <h3>Communication</h3> 
+        <h4>Explore <a href="{% url 'IceCream' %}" target="_top">Ice Cream Parlor</a>, <a href="{% url 'Hosptial' %}" target="_top">Hospital</a> </h4>
+            
+
+    </h3>
+        
+    </div>
+    
+    
+        
+   
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>

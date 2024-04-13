@@ -30,7 +30,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'webmaster@localhost'  # Adjust as necessary
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -62,7 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'personal_portfolio.urls'
-
+pip
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -131,8 +131,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = 'static/'
 LOGIN_REDIRECT_URL = '/'
 
 # Default primary key field type

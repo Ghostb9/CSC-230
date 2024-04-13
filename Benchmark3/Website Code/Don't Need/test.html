@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exhibits</title>
+    <style>
+        /* Your CSS Styles Here */
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #6dcff6;
+}
+
+#horizontal, #horizontal ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#horizontal a {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    background-color: #9b51e0;
+    display: block;
+}
+
+#horizontal li {
+    position: relative;
+    display: inline-block;
+}
+
+#horizontal a:hover {
+    background-color: #7d3cb3;
+}
+
+/* Dropdown Menus - Initial State Hidden */
+#horizontal ul {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+#horizontal ul li {
+    display: block;
+    color: #000;
+}
+
+#horizontal ul li a {
+    color: #333;
+    background-color: #f9f9f9;
+    padding: 5px 10px;
+}
+
+#horizontal ul li a:hover {
+    background-color: #ddd;
+}
+
+/* Show Direct Child ul on Hover */
+#horizontal li:hover > ul {
+    display: block;
+}
+
+/* Subsequent levels */
+#horizontal ul ul {
+    left: 100%;
+    top: 0;
+}
+    </style>
+</head>
+<body>
+    <ul id="horizontal">
+        <li><a href="homepage.html">Home</a></li>
+        <li>
+            <a href="#">Exhibits ▼</a>
+            <ul>
+                <li>
+                    <a href="#">Level 1 ▼</a>
+                    <ul>
+                        <li><a href="ArtSmart.html">Art Smart</a></li>
+                        <li><a href="BigJohn.html">Big John</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Level 2 ▼</a>
+                    <ul>
+                        <li><a href="CentralBank.html">Central Bank</a></li>
+                        <li><a href="EngineersWorkshop.html">Engineer's Workshop</a></li>
+                        <li><a href="Farm.html">Farm</a></li>
+                        <li><a href="Firehouse.html">Firehouse</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Level 3 ▼</a>
+                    <ul>
+                        <li><a href="GlobalCafe.html">Global Cafe</a></li>
+                        <li><a href="IceCream.html">Ice Cream Parlor</a></li>
+                        <li><a href="Kidsport.html">KidsPort</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Level 4 ▼</a>
+                    <ul>
+                        <li><a href="LightCloud.html">Light Cloud</a></li>
+                        <li><a href="PizzaPlace.html">Pizza Place</a></li>
+                        <li><a href="Publix.html">Publix</a></li>
+                        <li><a href="StJoes.html">St. Joseph's Children's Hospital</a></li>
+                        <li><a href="Tugboats.html">Tugboats Tots</a></li>
+                        <li><a href="Twinkle.html">Twinkle Stars Theater</a></li>
+                        <li><a href="Vet.html">Vet Clinic</a></li>
+                        <li><a href="Waters.html">Water's Journey</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="Resources.html">Resources</a></li>
+        <li><a href="Play.html">Play</a></li>
+        <li><a href="Map.html">Map</a></li>
+        <li>
+            <a href="#">About ▼</a>
+            <ul>
+                <li><a href="#">Item 3.1</a></li>
+                <li><a href="#">Item 3.2</a></li>
+                <li><a href="#">Item 3.3</a></li>
+            </ul>
+        </li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
+</body>
+</html>

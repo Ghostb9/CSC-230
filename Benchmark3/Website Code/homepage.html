@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<!-- CODE FOR GOOGLE TRANSLATE -->
+    <div id="google_translate_element"></div>
+    <div class = "header" ></div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/timeonsite/1.2.0/timeonsitetracker.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- CODE FOR TIMEONSITE TRACKER -->
+<script src="tosTracker.js"></script>
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Title Here</title>
+    <style>
+        body {
+            background-color: #6dcff6;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            position: relative;
+            height: 20vh; /* Adjust height as needed */
+            width: 80vh; 
+            background-image: url("1.jpg"); /* Set the image as background */
+            background-size: cover; /* Make sure the background image covers the entire header */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            overflow: hidden; /* Prevent content from overflowing */
+        }
+        .map-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .level-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Space between buttons */
+        }
+
+        .map-container {
+            width: 90vw;
+            height: 28vh;
+            border: 1px solid #3BBFB9;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .imgcontainer img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul#horizontal, #horizontal ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #horizontal > li {
+            float: left;
+            position: relative;
+        }
+
+        #horizontal > li > a {
+            display: block;
+            padding: 10px;
+            background-color: #9b51e0;
+            color: white;
+            text-decoration: none;
+            border: 1px solid white;
+        }
+
+        #horizontal > li > a:hover {
+            color: #107A83;
+        }
+
+        #horizontal > li > ul {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        #horizontal > li:hover > ul, #horizontal > li ul li:hover > ul {
+            display: block;
+        }
+
+        #horizontal li ul li {
+            position: relative;
+            float: none;
+        }
+
+        #horizontal li ul li a {
+            display: block;
+            background-color: #9b51e0;
+            color: white;
+            padding: 5px;
+            text-decoration: none;
+        }
+
+        #horizontal li ul li a:hover {
+            background-color: #7d3cb3;
+        }
+
+        #horizontal li ul li ul {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            min-width: 100%;
+        }
+
+        #horizontal li ul li:hover > ul {
+            display: block;
+        }
+        .cookie-consent-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0,0,0,.2);
+            border-radius: 5px;
+            z-index: 1000; /* Ensure it appears above other content */
+            display: none; /* Hidden by default */
+        }
+
+        .cookie-consent-content p {
+            margin: 0 0 20px;
+        }
+
+        .cookie-consent-buttons {
+            text-align: right;
+        }
+
+        .btn-cookie {
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+
+        /* Hamburger Menu Styles */
+        .hamburger-menu .menu-icon {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .hamburger-menu .menu-icon div {
+            background-color: #333;
+            height: 2px;
+            width: 30px;
+        }
+
+        .menu-content {
+            display: none;
+            flex-direction: column;
+            background-color: #f9f9f9;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .menu-content a {
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .menu-content a:hover {
+            background-color: #ddd;
+        }
+        
+        .menu-content a, .dropdown-content a {
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        .menu-content a:hover, .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            padding-left: 20px;
+        }
+        .dropdown-click {
+            cursor: pointer;
+        }
+        
+        .dropdown-content.active {
+            display: flex;
+        }
+        .menu-content a.dropdown-toggle {
+            cursor: pointer; /* Makes it clear it's clickable */
+        }
+        /* Ensures nested menus are initially hidden */
+        .nested-menu {
+            display: none;
+            position: relative;
+            padding-left: 20px; /* Indent nested menu items for visual hierarchy */
+        }
+        .nested-menu a {
+            display: block; /* Ensure proper block layout */
+            padding: 5px 10px; /* Consistent padding */
+            color: #333; /* Text color */
+            text-decoration: none; /* Remove underlines */
+        }
+        .nested-menu a:hover {
+            background-color: #ddd; /* Hover background */
+        }
+        /* Style for second-level nested menus */
+        .sub-nested-menu {
+            display: none;
+            padding-left: 20px; /* Further indentation for sub-level items */
+        }
+
+        
+
+
+    </style>
+</head>
+<body>
+    <div class="imgcontainer"></div>
+
+    <div class="hamburger-menu">
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="menu-content" id="menuContent">
+            <a class="dropdown-toggle" onclick="toggleDropdown('exhibitsDropdown')">Exhibits</a>
+            <div class="nested-menu" id="exhibitsDropdown">
+                <a class="dropdown-toggle" onclick="toggleDropdown('level1')">Level 1</a>
+                <div class="sub-nested-menu" id="level1">
+                    <a href="GlobalCafe.html">Global Cafe</a>
+                    <a href="GuestServices.html">Guest Services</a>
+                    <a href="Tugboats.html">Tugboats Tots</a>
+                    <a href="Kidsport.html">KidsPort</a>
+                </div>
+                <a class="dropdown-toggle" onclick="toggleDropdown('level2')">Level 2</a>
+                <div class="sub-nested-menu" id="level2">
+                    <a href="PartyPlace.html">Party Place</a>
+                    <a href="ArtSmart.html">Art Smart</a>
+                    <a href="EngineersWorkshop.html">Engineer's Workshop</a>
+                    <a href="Farm.html">Farm</a>
+                    <a href="Theater.html">Theater</a>
+                    <a href="OceanSandbox.html">Ocean Sandbox</a>
+                    <a href="Forts.html">Forts</a>
+                    <a href="TempExhibit.html">Temporary Exhibit</a>
+                    <a href="FamilyPlay.html">Family Play Project</a>
+                    <a href="Waters.html">Water's Journey</a>
+                    <a href="SafetyVillage.html">Safety Village</a>
+
+                    <!-- Add more Level 2 links here -->
+                </div>
+                <a class="dropdown-toggle" onclick="toggleDropdown('level3')">Level 3</a>
+                <div class="sub-nested-menu" id="level3">
+                    <a href="BigJohn.html">Big John</a>
+                    <a href="LearningCenter.html">Learning Center</a>
+                    
+
+                    <!-- Add more Level 3 links here -->
+                </div>
+            </div>
+            <!-- Other menu items here -->
+            <a href="Resources.html">Resources</a>
+            <a href="Play.html">Play</a>
+            <a class="dropdown-toggle" onclick="toggleDropdown('aboutDropdown')">About</a>
+            <div class="nested-menu" id="aboutDropdown">
+                <a href="https://glazermuseum.org/mission/">Mission + History</a>
+                <a href="https://glazermuseum.org/deai/">DEAI Statement</a> 
+                <a href="https://glazermuseum.org/contact/">Contact</a>
+            </div>
+            <a href="login.html">Login</a>
+            <!-- Add your "About" section here as previously -->
+        </div>
+    </div>
+
+
+
+    <div class="map-section">
+        <div class="level-buttons">
+            <button onclick="showLevel('Level1')">Level 1</button>
+            <button onclick="showLevel('Level2')">Level 2</button>
+            <button onclick="showLevel('Level3')">Level 3</button>
+        </div>
+
+        <div class="map-container" id="level1-container" style="display: block;">
+            <iframe src="Interactive Maps/Level1/interactive_map/dist/index1.html"></iframe>
+        </div>
+        <div class="map-container" id="level2-container" style="display: none;">
+            <iframe src="Interactive Maps/Level2/level2/dist/index.html"></iframe>
+        </div>
+        <div class="map-container" id="level3-container" style="display: none;">
+            <iframe src="Interactive Maps/Level3/interacrtivemap_3/dist/index.html"></iframe>
+        </div>
+    </div>
+
+    <div id="cookieConsentPopup" class="cookie-consent-popup">
+        <div class="cookie-consent-content">
+            <p>Cookies legal stuff here idk what else to put for a placeholder</p>
+            <div class="cookie-consent-buttons">
+                <button id="btnAcceptCookies" class="btn-cookie">Continue</button>
+                <button id="btnNecessaryCookies" class="btn-cookie">Only Use Necessary</button>
+            </div>
+        </div>
+    </div>
+    <!-- Cookie Consent JavaScript -->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menuContent');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+        
+        function toggleDropdown(dropdownId) {
+            var dropdown = document.getElementById(dropdownId);
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                var dropdowns = document.querySelectorAll(".nested-menu, .sub-nested-menu");
+                dropdowns.forEach(function(dropdown) {
+                    if (dropdown.style.display === 'block') {
+                        dropdown.style.display = 'none';
+                    }
+                });
+            }
+        }
+    </script>
+    
+        
+    
+    <script>
+        function showLevel(level) {
+            // Hide all map containers
+            var mapContainers = document.querySelectorAll('.map-container');
+            mapContainers.forEach(function(container) {
+                container.style.display = 'none';
+            });
+
+            // Show the selected map container
+            var selectedContainer = document.getElementById(level.toLowerCase() + '-container');
+            if (selectedContainer) {
+                selectedContainer.style.display = 'block';
+            } else {
+                console.error("Container not found for level:", level);
+            }
+        }
+    </script>
+
+
+    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var menu = document.getElementById('menuContent');
+        var menuIcon = document.querySelector('.menu-icon');
+
+        function toggleMenu() {
+            // Toggle menu display on click
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        menuIcon.onclick = function(event) {
+        
+            event.stopPropagation();
+            toggleMenu();
+        };
+
+        document.addEventListener('click', function(event) {
+            var target = event.target;
+            // Check if the click is outside the menu and the menu is currently displayed
+            if (menu.style.display === 'flex' && !menu.contains(target) && !menuIcon.contains(target)) {
+                // Close the menu
+                menu.style.display = 'none';
+            }
+        });
+
+        function toggleDropdown(dropdownId) {
+            var dropdown = document.getElementById(dropdownId);
+            if (dropdown) {
+                // Toggle dropdown display
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+
+
+        window.toggleDropdown = toggleDropdown;
+    });
+</script>      
+</body>
+</html>

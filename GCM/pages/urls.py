@@ -2,8 +2,11 @@
 from django.urls import path
 from pages import views
 from django.contrib import admin
+from .views import record_time_spent
+
 
 urlpatterns = [
+    path('record_time_spent/', record_time_spent, name='record_time_spent'),
     path("home/", views.home, name='home'),
     path("login/", views.LoginPageView, name='login'),
     path("BigJohn/", views.BigJohn, name='BigJohn'),

@@ -10,7 +10,8 @@ from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import ChildForm
-from .models import Child
+from .models import ChatbotResponse, Child
+from django.http import JsonResponse
 
 
 class CustomLoginView(LoginView):
@@ -53,8 +54,6 @@ def custom_logout(request):
     return LogoutView.as_view(next_page=next_page)(request)
 
 
-
-
 def add_child(request):
     if request.method == 'POST':
         form = ChildForm(request.POST)
@@ -82,3 +81,31 @@ def account_view(request):
         'children': children,
     }
     return render(request, 'Account.html', context)
+
+
+# views.py in your Django app
+
+
+def chatbot_api(request):
+    user_input = request.GET.get('input', '')
+    if "activity ideas" in user_input:
+        activities = generate_activity_ideas(request.user)
+        return JsonResponse({'message': " ".join(activities)})
+    try:
+        response = ChatbotResponse.objects.get(trigger__icontains=user_input)
+        return JsonResponse({'message': response.response})
+    except ChatbotResponse.DoesNotExist:
+        return JsonResponse({'message': "Sorry, I didn't understand that."})
+
+
+def generate_activity_ideas(user):
+    children = Child.objects.filter(parent=user)
+    ideas = []
+    for child in children:
+        if child.age < 5:
+            ideas.append("Consider simple puzzles or outdoor play in safe environments.")
+        elif child.age < 10:
+            ideas.append("Team sports, reading clubs, or science kits could be exciting.")
+        else:
+            ideas.append("Advanced model building, coding camps, or sports leagues are great.")
+    return ideas

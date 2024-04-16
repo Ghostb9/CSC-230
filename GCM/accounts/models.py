@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(null=True, blank=True)
@@ -21,8 +20,6 @@ class UserPost(models.Model):
         return f"Post by {self.user.username}"
 
 
-
-
 class Child(models.Model):
     GENDER_CHOICES = (
         ('boy', 'Boy'),
@@ -37,3 +34,11 @@ class Child(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ChatbotResponse(models.Model):
+    trigger = models.CharField(max_length=255)
+    response = models.TextField()
+
+    def __str__(self):
+        return self.trigger

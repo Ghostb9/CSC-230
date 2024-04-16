@@ -6,78 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>GCM-Prototype</title>
-    <style>
-        body, html {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-            background-color: #6dcff6;
-        }
-
-        .header {
-            position: relative;
-            height: 30vh; /* Adjust height as needed */
-            background-image: url('{% static "TugBoat2.jpg" %}'); /* Set the image as background */
-            background-size: cover; /* Make sure the background image covers the entire header */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Prevent the background image from repeating */
-            overflow: hidden; /* Prevent content from overflowing */
-        }
-
-        .home-button {
-            position: absolute;
-            top: 50px;
-            left: 1px;
-            width: 100px;
-            height: 100px;
-            border: 1px solid black;
-            padding: 10px;
-            background-color: #6dcff6;
-            background-image: url('{% static "HomeButton.png" %}'); 
-            background-size: cover; 
-            background-repeat: no-repeat;
-            text-indent: -9999px;
-            color: transparent; /* Hide text */
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .home-button:hover {
-            background-color: #9b51e0; 
-            transform: scale(1.1);
-        }
-        .bluetext {
-            color: lightseagreen;
-            font-size: 30;
-            
-        }
-        .info {
-            color: dark;
-            text-align: center;
-            font-size: 18px;
-            margin: 0 auto;
-            max-width: 800px;
-            padding : 0 20px 20px;
-            font-family: GCMBase, Arial, sans-serif;
-        }
-
-
-        .frame {
-            background-color: white; /* Set background color to white */
-            padding: 30px; /* Add padding to create space inside the box */
-            border: 1px solid black; 
-            width: 70%; /* Adjust width as needed */
-            margin: 0 auto; /* Center horizontally */
-            margin-top: 20px; /* Add top margin to create space below header */
-        }
-
-        .text-box input[type="text"] {
-            width: 90%; /* Lengthen input box */
-            box-sizing: border-box; 
-            padding: 10px; /* Add padding to the input box */
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Linking external CSS -->
 </head>
 
 <body>
@@ -87,11 +16,11 @@
             <div class="home-button"></div>
         </a>
     </div>
-    
+
     <div class="frame">
-        <p class="info"><b>Have you ever wondered what a <span class = "bluetext">Tugboat</span> does? 
-            <br>Hop aboard and see just how useful this small boat can 
-            <br> be as it helps even the largest ships navigate difficult  
+        <p class="info"><b>Have you ever wondered what a <span class="bluetext">Tugboat</span> does?
+            <br>Hop aboard and see just how useful this small boat can
+            <br> be as it helps even the largest ships navigate difficult
             <br>waters. Children will enjoy learning about tugboats while
              <br>exploring various sensory touch-and-feel elements.
 
@@ -100,7 +29,7 @@
         <!-- Second frame content goes here -->
         <!-- You can add more content or input boxes here -->
     </div>
-    
+
     <div class="frame">
         <!-- First frame content goes here -->
         <h2>Enter Play Type:</h2>

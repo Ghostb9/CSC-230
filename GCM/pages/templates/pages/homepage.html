@@ -439,28 +439,7 @@
         </div>
     </div>
     <!-- Cookie Consent JavaScript -->
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById('menuContent');
-            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-        }
-        
-        function toggleDropdown(dropdownId) {
-            var dropdown = document.getElementById(dropdownId);
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
 
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropdown-toggle')) {
-                var dropdowns = document.querySelectorAll(".nested-menu, .sub-nested-menu");
-                dropdowns.forEach(function(dropdown) {
-                    if (dropdown.style.display === 'block') {
-                        dropdown.style.display = 'none';
-                    }
-                });
-            }
-        }
-    </script>
     
         
     

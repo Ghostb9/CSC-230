@@ -12,6 +12,15 @@ from django.urls import reverse_lazy
 from .forms import ChildForm
 from .models import ChatbotResponse, Child
 from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
+from .models import Exhibit
+from .models import TypeofPlay, Activity
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from .models import PageTimeSpent
+import json
 
 
 class CustomLoginView(LoginView):
@@ -109,3 +118,15 @@ def generate_activity_ideas(user):
         else:
             ideas.append("Advanced model building, coding camps, or sports leagues are great.")
     return ideas
+
+# this view handles the incoming data about time spent
+@require_POST
+@login_required
+def record_time_spent(request):
+    data = json.loads(request.body)
+    PageTimeSpent.objects.create(
+        user=request.user,
+        url=data['url'],
+        time_spent=data['time_spent']
+    )
+    return JsonResponse({"status": "success"})

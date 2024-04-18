@@ -4,6 +4,10 @@ from .models import TypeofPlay, Activity
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from .models import PageTimeSpent
+import json
 
 
 def html_view(request, pk):
@@ -50,3 +54,15 @@ def get_activities(request):
 
     except TypeofPlay.DoesNotExist:
         return JsonResponse({'error': 'Play type not found'}, status=404)
+
+# this view handles the incoming data about time spent
+@require_POST
+@login_required
+def record_time_spent(request):
+    data = json.loads(request.body)
+    PageTimeSpent.objects.create(
+        user=request.user,
+        url=data['url'],
+        time_spent=data['time_spent']
+    )
+    return JsonResponse({"status": "success"})

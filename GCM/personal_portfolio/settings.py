@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'django.contrib.sites',
-    'accounts',
     'csctest',
 
 

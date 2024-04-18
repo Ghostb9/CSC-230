@@ -42,3 +42,14 @@ class ChatbotResponse(models.Model):
 
     def __str__(self):
         return self.trigger
+
+
+# model that stores the time spent by each user on different pages 
+class PageTimeSpent(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    url = models.CharField(max_length=2048)
+    time_spent = models.IntegerField(help_text="Time spent in milliseconds")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} spent {self.time_spent} on {self.url}"

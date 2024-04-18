@@ -30,7 +30,7 @@
         .header {
             position: relative;
             height: 10vh; /* Adjust height as needed */
-            width: 100%; 
+            width: 100%;
             background-image: url('{% static "1.jpg" %}'); /* Set the image as background */
             background-size: cover; /* Make sure the background image covers the entire header */
             background-position: center; /* Center the background image */
@@ -43,7 +43,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             width: 100%; /* Use 100% of the width */
             height: 100vh; /* Optionally set a minimum height */
              overflow: hidden;
@@ -71,9 +71,9 @@
             height: 100%; /* Set a minimum height, or make it responsive to the content */
             border: none;
             overflow: hidden;
-           
+
         }
-        
+
          .map-container .no-scroll {
             pointer-events: none; /* Optional: Disables mouse events on the iframe */
             overflow: hidden; /* Ensures no internal scrolling is possible */
@@ -84,8 +84,8 @@
             .level-buttons, .map-container iframe{
                width: 100%;
                 max-width: 100%;
-            }  
-            
+            }
+
             @media (max-width: 600px) {
                 .map-section {
                 margin-top: 0;
@@ -94,12 +94,12 @@
 
             .map-container iframe {
                 height: 50vh;
-                 
-                
-                
+
+
+
             }
         }
-        
+
 
 
 
@@ -242,7 +242,7 @@
         .menu-content a:hover {
             background-color: #ddd;
         }
-        
+
         .menu-content a, .dropdown-content a {
             padding: 10px;
             text-decoration: none;
@@ -252,7 +252,7 @@
         .menu-content a:hover, .dropdown-content a:hover {
             background-color: #ddd;
         }
-       
+
         .menu-content a.dropdown-toggle {
             cursor: pointer;
             /* Makes it clear it's clickable */
@@ -279,18 +279,18 @@
             padding-left: 20px;
             overflow-y: auto/* Further indentation for sub-level items */
         }
-        
+
        .frame {
             background-color: white; /* Set background color to white */
             padding: 30px; /* Add padding to create space inside the box */
-            border: 1px solid black; 
+            border: 1px solid black;
             width: 70%; /* Adjust width as needed */
             margin: 0 auto; /* Center horizontally */
             margin-top: 20px;
        }
-       
+
        .info {
-            color: dark;
+            color: black;
             text-align: center;
             font-size: 18px;
             margin: 0 auto;
@@ -300,9 +300,12 @@
        .no-scroll {
            overflow: hidden;
 }
-       
+
     </style>
+
+
 <script>
+    //Menu functions
     document.addEventListener('DOMContentLoaded', function() {
         var menu = document.getElementById('menuContent');
         var menuIcon = document.querySelector('.menu-icon');
@@ -344,9 +347,32 @@
 
         window.toggleDropdown = toggleDropdown;
     });
+
+    //Map functions
+    function showLevel(level) {
+        // Hide all map containers
+
+
+        var mapContainers = document.querySelectorAll('.map-container');
+        mapContainers.forEach(function(container) {
+            container.style.display = 'none';
+        });
+
+        // Show the selected map container
+        var selectedContainer = document.getElementById(level.toLowerCase() + '-container');
+        if (selectedContainer) {
+            selectedContainer.style.display = 'block';
+
+        } else {
+            console.error("Container not found for level:", level);
+        }
+    }
+
 </script>
 </head>
 <body>
+
+<!--Menu content-->
     <div class="hamburger-menu">
         <div class="menu-icon" onclick= "toggleMenu()">
             <div></div>
@@ -361,26 +387,47 @@
                     <a href="{% url 'html_view' pk=exhibit.pk %}">{{ exhibit.title }}</a>
                 {% endfor %}
             </div>
-               
-            <!-- Other menu items here -->
+
+
             <a href="Resources.html">Resources</a>
             <a href="Play.html">Play</a>
             <a class="dropdown-toggle" onclick="toggleDropdown('aboutDropdown')">About</a>
             <div class="nested-menu" id="aboutDropdown">
                 <a href="https://glazermuseum.org/mission/">Mission + History</a>
-                <a href="https://glazermuseum.org/deai/">DEAI Statement</a> 
+                <a href="https://glazermuseum.org/deai/">DEAI Statement</a>
                 <a href="https://glazermuseum.org/contact/">Contact</a>
             </div>
             <a href = "Account.html">Account</a>
             <a href="login.html">Login</a>
             <a href="{% url 'admin:index' %}">Login(Admin)</a>
-            <!-- Add your "About" section here as previously -->
+
         </div>
     </div>
-    
-    <div class="frame">
-        <p class="info"><b>Welcome to the Glazier Children's Musuem! Here, your child can LEARN through PLAY.</b></p>
-    </div>
+
+<!--First textbox on homepage-->
+<div class="frame">
+    <p class="info"><b>Welcome to the Glazier Children's Musuem! Here, your child can LEARN through PLAY.</b></p>
+</div>
+
+<!-- Map html -->
+<div class="map-section">
+<div class="level-buttons">
+    <button onclick="showLevel('Level1')">Level 1</button>
+    <button onclick="showLevel('Level2')">Level 2</button>
+    <button onclick="showLevel('Level3')">Level 3</button>
+</div>
+
+   <div class="map-container" id="level1-container" style="display: block;">
+    <iframe src="{% static 'maps/Level1/interactive_map/dist/index1.html' %}" ></iframe>
+</div>
+<div class="map-container" id="level2-container" style="display: none;">
+    <iframe src="{% static 'maps/Level2/level2/dist/index.html' %}"></iframe>
+</div>
+<div class="map-container" id="level3-container" style="display: none;">
+    <iframe src="{% static 'maps/Level3/level3/dist/index3.html' %}"></iframe>
+</div>
+
+
 </body>
 </html>
 

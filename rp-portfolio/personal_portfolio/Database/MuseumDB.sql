@@ -8,7 +8,7 @@ CREATE TABLE Exhibit (
     Location VARCHAR(100)
 );
 
-CREATE TABLE Activities (
+CREATE TABLE Activities(
     ActivityID INT PRIMARY KEY,
     ActivityName VARCHAR(100),
     Category VARCHAR(50),
@@ -16,7 +16,6 @@ CREATE TABLE Activities (
     Description TEXT,
     ExhibitName VARCHAR(100),
     FOREIGN KEY (ExhibitName) REFERENCES Exhibit(ExhibitName)
-
 );
 
 CREATE TABLE Users(

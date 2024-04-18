@@ -7,6 +7,24 @@
 #imports functions from django
 from django.shortcuts import render
 from .models import Post
+# imports to handle incoming data about page time spent
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from .models import PageTimeSpent
+import json
+# views to handle all of said data about page time spent
+@require_POST
+@login_required
+def record_time_spent(request):
+    data = json.loads(request.body)
+    PageTimeSpent.objects.create(
+        user=request.user,
+        url=data['url'],
+        time_spent=data['time_spent']
+    )
+    return JsonResponse({"status": "success"})
+
 
 #functions for showing html sites
 def post_list(request):

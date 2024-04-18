@@ -15,7 +15,7 @@ from django.http import JsonResponse
 
 
 class CustomLoginView(LoginView):
-    template_name = 'pages/login.html'  # Path to your login template
+    template_name = 'csctest/login.html'  # Path to your login template
     redirect_authenticated_user = True  # Redirect users who are already logged in
     next_page = reverse_lazy('home')  # Redirect to homepage upon successful login
 

@@ -35,6 +35,10 @@ def Resources(request):
 def Play(request):
     return render(request, "Play.html", {})
 
+def custom_logout(request):
+    next_page = request.GET.get('next', reverse_lazy('homepage_view'))
+    return LogoutView.as_view(next_page=next_page)(request)
+
 
 @csrf_exempt
 @require_http_methods(["POST"])

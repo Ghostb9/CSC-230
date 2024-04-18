@@ -1,7 +1,8 @@
-<!-- your_app/templates/your_app/homepage.html -->
 {% load static %}
+{%block content%}
 <!DOCTYPE html>
 <html lang="en">
+<script src="tosTracker.js"></script>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -15,6 +16,38 @@
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- CODE FOR TIMEONSITE TRACKER -->
+<script>
+    var config = {
+        // track page by seconds. Default tracking is by milliseconds
+        trackBy: 'seconds',
+        callback: function(data) { /* callback denotes your data tracking is real-time */
+            console.log(data);
+            var endPointUrl = 'http://localhost:8000/track-tos/'; //Replace with your actual backend API URL
+            if (data && data.trackingType) {
+                if (data.trackingType == 'tos') {
+                    if (Tos.verifyData(data) != 'valid') {
+                        console.log('Data abolished!');
+                        return;
+                    }
+                }
+
+                // make use of sendBeacon if this API is supported by your browser.
+                if (navigator && typeof navigator.sendBeacon === 'function') {
+                    data.trasferredWith = 'sendBeacon';
+                    var blob = new Blob([JSON.stringify(data)], {type : 'application/json'});
+                    navigator.sendBeacon(endPointUrl, blob);
+                }
+            }
+        }
+    };
+    var Tos;
+    if (TimeOnSiteTracker) {
+        Tos = new TimeOnSiteTracker(config);
+    }
+    </script>
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +70,7 @@
             background-repeat: no-repeat; /* Prevent the background image from repeating */
             overflow: hidden; /* Prevent content from overflowing */
         }
-        .map-section {
+    .map-section {
             margin: 0;
             padding: 0;
             display: flex;
@@ -275,7 +308,7 @@
         }
         /* Style for second-level nested menus */
         .sub-nested-menu {
-            display: block;
+            display: none;
             padding-left: 20px;
             overflow-y: auto/* Further indentation for sub-level items */
         }
@@ -287,10 +320,9 @@
             width: 70%; /* Adjust width as needed */
             margin: 0 auto; /* Center horizontally */
             margin-top: 20px;
-       }
 
        .info {
-            color: black;
+            color: dark;
             text-align: center;
             font-size: 18px;
             margin: 0 auto;
@@ -301,11 +333,117 @@
            overflow: hidden;
 }
 
+
+
+
+
     </style>
+</head>
+<body>
+    <div class="imgcontainer"></div>
+    <div>
+        {% if user.is_authenticated %}
+            <p>Welcome, {{ user.username }}!</p>
+            <a href="{% url 'custom_logout' %}?next={{ request.path }}">Logout</a> <!-- Ensure you have a URL named 'logout' --><!-- Adjust based on your URL name for registration -->
+        {% endif %}
+    </div>
+
+<div class="hamburger-menu">
+    <div class="menu-icon" onclick= "toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="menu-content" id="menuContent">
+        <a class="dropdown-toggle" onclick="toggleDropdown('exhibitsDropdown')">Exhibits</a>
+        <div class="nested-menu" id="exhibitsDropdown">
+            {% for exhibit in html_pages %}
+                <a href="{% url 'html_view' pk=exhibit.pk %}">{{ exhibit.title }}</a>
+            {% endfor %}
+        </div>
+
+
+        <a href="Resources.html">Resources</a>
+        <a href="Play.html">Play</a>
+        <a class="dropdown-toggle" onclick="toggleDropdown('aboutDropdown')">About</a>
+        <div class="nested-menu" id="aboutDropdown">
+            <a href="https://glazermuseum.org/mission/">Mission + History</a>
+            <a href="https://glazermuseum.org/deai/">DEAI Statement</a>
+            <a href="https://glazermuseum.org/contact/">Contact</a>
+        </div>
+        <a href = "Account.html">Account</a>
+        <a href="login.html">Login</a>
+        <a href="{% url 'admin:index' %}">Login(Admin)</a>
+
+    </div>
+</div>
+
+
+    <div class="frame">
+        <p class="info"><b>Welcome to the Glazer Children's Museum! Here, your child can LEARN through PLAY.</b></p>
+    </div>
+
+
+
+    <div class="map-section">
+        <div class="level-buttons">
+            <button onclick="showLevel('Level1')">Level 1</button>
+            <button onclick="showLevel('Level2')">Level 2</button>
+            <button onclick="showLevel('Level3')">Level 3</button>
+        </div>
+
+   <div class="map-container" id="level1-container" style="display: block;">
+    <iframe src="{% static 'maps/Level1/interactive_map/dist/index1.html' %}" ></iframe>
+</div>
+<div class="map-container" id="level2-container" style="display: none;">
+    <iframe src="{% static 'maps/Level2/level2/dist/index.html' %}"></iframe>
+</div>
+<div class="map-container" id="level3-container" style="display: none;">
+    <iframe src="{% static 'maps/Level3/level3/dist/index3.html' %}"></iframe>
+</div>
+
+
+    <div id="cookieConsentPopup" class="cookie-consent-popup">
+        <div class="cookie-consent-content">
+            <p>Cookies legal stuff here idk what else to put for a placeholder</p>
+            <div class="cookie-consent-buttons">
+                <button id="btnAcceptCookies" class="btn-cookie">Continue</button>
+                <button id="btnNecessaryCookies" class="btn-cookie">Only Use Necessary</button>
+            </div>
+        </div>
+    </div>
+    <!-- Cookie Consent JavaScript -->
+
+
+
+
+    <script>
+        function showLevel(level) {
+            // Hide all map containers
+
+
+            var mapContainers = document.querySelectorAll('.map-container');
+            mapContainers.forEach(function(container) {
+                container.style.display = 'none';
+            });
+
+            // Show the selected map container
+            var selectedContainer = document.getElementById(level.toLowerCase() + '-container');
+            if (selectedContainer) {
+                selectedContainer.style.display = 'block';
+
+            } else {
+                console.error("Container not found for level:", level);
+            }
+        }
+
+    </script>
+
+
 
 
 <script>
-    //Menu functions
     document.addEventListener('DOMContentLoaded', function() {
         var menu = document.getElementById('menuContent');
         var menuIcon = document.querySelector('.menu-icon');
@@ -347,87 +485,7 @@
 
         window.toggleDropdown = toggleDropdown;
     });
-
-    //Map functions
-    function showLevel(level) {
-        // Hide all map containers
-
-
-        var mapContainers = document.querySelectorAll('.map-container');
-        mapContainers.forEach(function(container) {
-            container.style.display = 'none';
-        });
-
-        // Show the selected map container
-        var selectedContainer = document.getElementById(level.toLowerCase() + '-container');
-        if (selectedContainer) {
-            selectedContainer.style.display = 'block';
-
-        } else {
-            console.error("Container not found for level:", level);
-        }
-    }
-
 </script>
-</head>
-<body>
-
-<!--Menu content-->
-    <div class="hamburger-menu">
-        <div class="menu-icon" onclick= "toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-
-        <div class="menu-content" id="menuContent">
-            <a class="dropdown-toggle" onclick="toggleDropdown('exhibitsDropdown')">Exhibits</a>
-            <div class="nested-menu" id="exhibitsDropdown">
-                {% for exhibit in html_pages %}
-                    <a href="{% url 'html_view' pk=exhibit.pk %}">{{ exhibit.title }}</a>
-                {% endfor %}
-            </div>
-
-
-            <a href="Resources.html">Resources</a>
-            <a href="Play.html">Play</a>
-            <a class="dropdown-toggle" onclick="toggleDropdown('aboutDropdown')">About</a>
-            <div class="nested-menu" id="aboutDropdown">
-                <a href="https://glazermuseum.org/mission/">Mission + History</a>
-                <a href="https://glazermuseum.org/deai/">DEAI Statement</a>
-                <a href="https://glazermuseum.org/contact/">Contact</a>
-            </div>
-            <a href = "Account.html">Account</a>
-            <a href="login.html">Login</a>
-            <a href="{% url 'admin:index' %}">Login(Admin)</a>
-
-        </div>
-    </div>
-
-<!--First textbox on homepage-->
-<div class="frame">
-    <p class="info"><b>Welcome to the Glazier Children's Musuem! Here, your child can LEARN through PLAY.</b></p>
-</div>
-
-<!-- Map html -->
-<div class="map-section">
-<div class="level-buttons">
-    <button onclick="showLevel('Level1')">Level 1</button>
-    <button onclick="showLevel('Level2')">Level 2</button>
-    <button onclick="showLevel('Level3')">Level 3</button>
-</div>
-
-   <div class="map-container" id="level1-container" style="display: block;">
-    <iframe src="{% static 'maps/Level1/interactive_map/dist/index1.html' %}" ></iframe>
-</div>
-<div class="map-container" id="level2-container" style="display: none;">
-    <iframe src="{% static 'maps/Level2/level2/dist/index.html' %}"></iframe>
-</div>
-<div class="map-container" id="level3-container" style="display: none;">
-    <iframe src="{% static 'maps/Level3/level3/dist/index3.html' %}"></iframe>
-</div>
-
-
 </body>
 </html>
-
+{%endblock%}

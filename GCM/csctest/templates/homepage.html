@@ -303,23 +303,47 @@
        
     </style>
 <script>
-    function toggleMenu() {
+    document.addEventListener('DOMContentLoaded', function() {
         var menu = document.getElementById('menuContent');
-        if (menu.style.display === 'block') {
-            menu.style.display = 'none';
-        } else {
-            menu.style.display = 'block';
-        }
-    }
+        var menuIcon = document.querySelector('.menu-icon');
 
-    function toggleDropdown(dropdownId) {
-        var dropdown = document.getElementById(dropdownId);
-        if(dropdown.style.display === 'block') {
-            dropdown.style.display = 'none';
-        } else {
-            dropdown.style.display = 'block';
+        function toggleMenu() {
+            // Toggle menu display on click
+            var menu = document.getElementById('menuContent');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+            if(menu.style.display === 'flex'){
+                document.body.classList.add('no-scroll');
+            } else {
+                document.body.classList.remove('no-scroll');
+            }
         }
-    }
+
+        menuIcon.onclick = function(event) {
+
+            event.stopPropagation();
+            toggleMenu();
+        };
+
+        document.addEventListener('click', function(event) {
+            var target = event.target;
+            // Check if the click is outside the menu and the menu is currently displayed
+            if (menu.style.display === 'flex' && !menu.contains(target) && !menuIcon.contains(target)) {
+                // Close the menu
+                menu.style.display = 'none';
+            }
+        });
+
+        function toggleDropdown(dropdownId) {
+            var dropdown = document.getElementById(dropdownId);
+            if (dropdown) {
+                // Toggle dropdown display
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+
+
+        window.toggleDropdown = toggleDropdown;
+    });
 </script>
 </head>
 <body>

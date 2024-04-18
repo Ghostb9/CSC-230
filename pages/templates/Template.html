@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ exhibit_title }}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'tosTracker.js' %}"></script>
+</head>
+
+ 
+
+
+<body>
+     <div class="header" style="background-image: url('{% static exhibit_image %}');">
+        <a href="{% url 'home' %}">
+            <div class="home-button"></div>
+        </a>
+        <div id="google_translate_element"></div>
+    </div>
+    
+    <div class="frame">
+        <p class="info"></p>
+    </div>
+<div class="hamburger-menu">
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="menu-content" id="menuContent">
+            <a class="dropdown-toggle" onclick="toggleDropdown('exhibitsDropdown')">Exhibits</a>
+            <div class="nested-menu" id="exhibitsDropdown">
+                <a class="dropdown-toggle" onclick="toggleDropdown('level1')">Level 1</a>
+                <div class="sub-nested-menu" id="level1">
+                    <a href="https://72839.blackbaudhosting.com/72839/tickets?tab=3&txobjid=1b87ef14-b89d-4a5c-803f-79124cc2bcd8">Guest Services</a>
+                    <a href="{% url 'TugBoats' %}">Tugboats Tots</a>
+                    <a href="{% url 'KidsPort' %}">KidsPort</a>
+                </div>
+                <a class="dropdown-toggle" onclick="toggleDropdown('level2')">Level 2</a>
+                <div class="sub-nested-menu" id="level2">
+                    <a href="{% url 'PartyPlace' %}">Party Place</a>
+                    <a href="{% url 'ArtSmart' %}">Art Smart</a>
+                    <a href="{% url 'EngineersWorkshop' %}">Engineer's Workshop</a>
+                    <a href="{% url 'Farm' %}">Farm</a>
+                    <a href="{% url 'Theater' %}">Theater</a>
+                    <a href="{% url 'OceanSandbox' %}">Ocean Sandbox</a>
+                    <a href="{% url 'Forts' %}">Forts</a>
+                    <a href="{% url 'Temp' %}">Temporary Exhibit</a>
+                    <a href="{% url 'FamilyPlayProject' %}">Family Play Project</a>
+                    <a href="{% url 'Waters' %}">Water's Journey</a>
+                    <a href="{% url 'SafetyVillage' %}">Safety Village</a>
+
+                    <!-- Add more Level 2 links here -->
+                </div>
+                <a class="dropdown-toggle" onclick="toggleDropdown('level3')">Level 3</a>
+                <div class="sub-nested-menu" id="level3">
+                    <a href="{% url 'BigJohn' %}">Big John</a>
+                    
+                    
+
+                    <!-- Add more Level 3 links here -->
+                </div>
+            </div>
+            <!-- Other menu items here -->
+            <a href="{% url 'Resources' %}">Resources</a>
+            <a href="{% url 'Play' %}">Play</a>
+            <a class="dropdown-toggle" onclick="toggleDropdown('aboutDropdown')">About</a>
+            <div class="nested-menu" id="aboutDropdown">
+                <a href="https://glazermuseum.org/mission/">Mission + History</a>
+                <a href="https://glazermuseum.org/deai/">DEAI Statement</a> 
+                <a href="https://glazermuseum.org/contact/">Contact</a>
+            </div>
+            <a href = "{% url 'Account' %}">Account</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'admin:index' %}">Login(Admin)</a>
+            <!-- Add your "About" section here as previously -->
+        </div>
+    </div>
+    
+
+    
+
+    <div class="frame">
+        <p class="info"><b>Have you ever wondered what a <span style="color: {{ text_color }};">{{ exhibit_name }}</span> does?
+            <br>{{ exhibit_text }}
+        </b></p>
+    </div>
+
+    
+    
+<div class="frame"> 
+    <h2>Enter Play Type:</h2>
+    <form id="playTypeForm">
+        {% csrf_token %}
+        <select name="play_type" required>
+            <option value="" disabled selected>Select play type</option>
+            <option value="Physical">Physical Play</option>
+            <option value="Socio-Emotional">Socio-Emotional Play</option>
+            <option value="Sensory">Sensory Play</option>
+            <option value="Cognitive">Cognitive Play</option>
+            <option value="Communication">Communication Play</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="resultsContainer"></div>
+</div>
+
+<script>
+document.getElementById('playTypeForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const playType = this.play_type.value;
+    fetch('{% url 'get_activities' %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': this.querySelector('[name=csrfmiddlewaretoken]').value,
+        },
+        body: 'play_type=' + encodeURIComponent(playType),
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            return response.text().then(text => { throw new Error(text || 'Server responded with status: ' + response.status) });
+        }
+    })
+    .then(data => {
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        // Process the JSON data as before
+        const resultsContainer = document.getElementById('resultsContainer');
+        let content = `<h2>${playType} Play</h2><p>${data.typeDescription}</p><ul>`;
+        data.activities.forEach(activity => {
+            content += `<li>${activity.activityName}: ${activity.description}</li>`;
+        });
+        content += '</ul>';
+        resultsContainer.innerHTML = content;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('resultsContainer').innerHTML = `<p>Error: ${error.message}</p>`;
+    });
+});
+</script>
+
+
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menuContent');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+        
+        function toggleDropdown(dropdownId) {
+            var dropdown = document.getElementById(dropdownId);
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                var dropdowns = document.querySelectorAll(".nested-menu, .sub-nested-menu");
+                dropdowns.forEach(function(dropdown) {
+                    if (dropdown.style.display === 'block') {
+                        dropdown.style.display = 'none';
+                    }
+                });
+            }
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

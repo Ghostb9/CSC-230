@@ -62,7 +62,7 @@
     <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
         <div class="imgcontainer">
-            <a href="{% url 'home' %}">
+            <a href="{% url 'homepage_view' %}">
                 <img src="{% static 'HomeButton.png' %}" alt="Avatar" class="avatar">
             </a>
         </div>

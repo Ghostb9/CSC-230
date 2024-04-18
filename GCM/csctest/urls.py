@@ -14,7 +14,7 @@ urlpatterns = [
     path('Account/', views.Account, name='Account'),
     path("login/", views.LoginPageView, name='login'),
     path('get_activities/', views.get_activities, name='get_activities'),
-    path("Resources/", views.Resources, name='Resources'),
-    path("Play/", views.Play, name='Play'),
+    path("Resources.html", views.Resources, name='Resources'),
+    path("Play.html", views.Play, name='Play'),
     path('admin/', admin.site.urls)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

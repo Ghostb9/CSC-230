@@ -28,11 +28,13 @@ class Child(models.Model):
         ('girl', 'Girl'),
         ('not_say', 'Prefer not to say'),
     )
-
     parent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='children')
     name = models.CharField(max_length=100)
     birthdate = models.DateField()
     gender = models.CharField(max_length=7, choices=GENDER_CHOICES, default='not_say')
+
+    class Meta:
+        db_table = 'accounts_child'
 
     def __str__(self):
         return self.name

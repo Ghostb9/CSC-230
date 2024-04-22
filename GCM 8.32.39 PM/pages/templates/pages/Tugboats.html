@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<script src="tosTracker.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GCM-Prototype</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Linking external CSS -->
+</head>
+
+<body>
+    <div id="google_translate_element"></div>
+    <div class="header">
+        <a href="{% url 'home' %}">
+            <div class="home-button"></div>
+        </a>
+    </div>
+
+    <div class="frame">
+        <p class="info"><b>Have you ever wondered what a <span class="bluetext">Tugboat</span> does?
+            <br>Hop aboard and see just how useful this small boat can
+            <br> be as it helps even the largest ships navigate difficult
+            <br>waters. Children will enjoy learning about tugboats while
+             <br>exploring various sensory touch-and-feel elements.
+
+        </b>
+        </p>
+        <!-- Second frame content goes here -->
+        <!-- You can add more content or input boxes here -->
+    </div>
+
+    <div class="frame">
+        <!-- First frame content goes here -->
+        <h2>Enter Play Type:</h2>
+        <form action="submit.php" method="post" class="text-box">
+            <select name="userdata" required>
+                <option value="" disabled selected>Select play type</option>
+                <option value="Physical">Physical Play</option>
+                <option value="Socio-Emotional">Socio-Emotional Play</option>
+                <option value="Sensory">Sensory Play</option>
+                <option value="Cognitive">Cognitive Play</option>
+                <option value="Communication">Communication Play</option>
+                <!-- Add more options as needed -->
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
     <title>{{ html_page.title }}</title>
 {% if html_page.image %}
     <style>
@@ -52,8 +53,8 @@
             max-width: 800px;
             padding: 20px;
         }
-        .greentext {
-            color: #4CAF50;
+        .text {
+            color: black;
             font-size: 30;
             
         }
@@ -109,12 +110,97 @@
             <div class="home-button"></div>
         </a>
     </div>
+    <div id="google_translate_element"></div>
     <div class="frame">
         <div id="words">
-            <p>{{ html_page.play_type }}<br> <span class="greentext"><b>{{ html_page.title }}</b></span></p>
+            <p>{{ html_page.play_type }}<br> <span class="text"><b>{{ html_page.title }}</b></span></p>
+            <p class="info"><b>{{ html_page.content|safe }}</p>
         </div>
-        <p class="info"><b>{{ html_page.content|safe }}</p>
     </div>
+
+        <!-- Add this within your .frame div -->
+
+        <div class="frame">
+            <button id="show-recommendations" onclick="fetchActivities()">How is my child learning through play at this exhibit?</button>
+            <div id="activity-recommendations" style="display: none;">
+                <ul id="activities-list"></ul>
+                <button id="hide-recommendations" onclick="toggleRecommendations()">Hide Recommendations</button>
+            </div>
+            <form method="post" action="{% url 'rate_exhibit' html_page.id %}">
+                {% csrf_token %}
+                <div class="rating-form">
+                    <label for="child">Select Child:</label>
+                    <select name="child_id" id="child">
+                        children = request.user.children.all()
+                        {% for child in children %}
+                        <option value="{{ child.id }}">{{ child.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="rating">Rating:</label>
+                        <select name="rating" id="rating">
+                            <option value="1">1 - Had no interest</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10" >10 - Loved it</option>
+                        </select>
+
+                    <button type="submit">Submit Rating</button>
+                </div>
+            </form>
+</div>
     <script src="{% static 'static/time_tracking.js' %}"></script>
+
+<script type="text/javascript">
+function fetchActivities() {
+    const exhibitName = "{{ html_page.title }}";
+    fetch(`/get-activities-for-exhibit/${encodeURIComponent(exhibitName)}/`)
+        .then(response => response.json())
+        .then(data => {
+            const activitiesList = document.getElementById('activities-list');
+            activitiesList.innerHTML = '';
+
+            if (data.error) {
+                console.error(data.error);
+                activitiesList.innerHTML = '<li>' + data.error + '</li>';
+                return;
+            }
+
+            data.activities.forEach(activity => {
+                let listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>${activity.activityName}</strong>: ${activity.description}`;
+                activitiesList.appendChild(listItem);
+            });
+
+            // Show the activities section and the hide button
+            document.getElementById('activity-recommendations').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function toggleRecommendations() {
+    var recommendations = document.getElementById('activity-recommendations');
+    recommendations.style.display = (recommendations.style.display === 'none' ? 'block' : 'none');
+}
+</script>
+
+
+
+<script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
 </body>
 </html>

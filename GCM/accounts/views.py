@@ -1,4 +1,3 @@
-
 from django.contrib.auth import login
 from .forms import UserRegisterForm
 from django.core.mail import send_mail
@@ -14,7 +13,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
-#from .models import PageTimeSpent
+# from .models import PageTimeSpent
 import json
 
 
@@ -68,7 +67,6 @@ def add_child(request):
             return redirect('Account')  # Redirect to the account page
     else:
         form = ChildForm()
-
     children = request.user.children.all()
     return render(request, 'Account.html', {'form': form, 'children': children})
 
@@ -78,13 +76,8 @@ def add_child(request):
 
 @login_required
 def account_view(request):
-    # Get all Child objects related to the current user
-    children = Child.objects.filter(parent=request.user)
-    # Pass the children to the Account.html template
-    context = {
-        'children': children,
-    }
-    return render(request, 'Account.html', context)
+    children = request.user.children.all()
+    return render(request, 'Account.html', {'children': children})
 
 
 # views.py in your Django app
@@ -113,6 +106,7 @@ def generate_activity_ideas(user):
         else:
             ideas.append("Advanced model building, coding camps, or sports leagues are great.")
     return ideas
+
 
 # this view handles the incoming data about time spent
 @require_POST

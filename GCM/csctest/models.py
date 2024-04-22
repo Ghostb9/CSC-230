@@ -1,8 +1,12 @@
 # Create your models here.
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.conf import settings
+from django import forms
+from accounts.models import Child
 
-# model that stores the time spent by each user on different pages 
+
+# model that stores the time spent by each user on different pages
 class PageTimeSpent(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     url = models.CharField(max_length=2048)
@@ -20,6 +24,18 @@ class Exhibit(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ExhibitRating(models.Model):
+    child = models.ForeignKey(Child, on_delete=models.CASCADE)
+    exhibit = models.ForeignKey(Exhibit, on_delete=models.CASCADE)
+    rating = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(10)])
+
+    class Meta:
+        unique_together = ('child', 'exhibit')
+
+
+
 
 
 class TypeofPlay(models.Model):
@@ -40,7 +56,7 @@ class Activity(models.Model):
     category = models.ForeignKey(TypeofPlay, on_delete=models.CASCADE, db_column='Category')
     subcategory = models.CharField(max_length=255)
     description = models.TextField()
-    ExhibitName = models.ForeignKey(Exhibit, on_delete=models.CASCADE, db_column='ExhibitName')
+    ExhibitName = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'Activities'  # The name of your table

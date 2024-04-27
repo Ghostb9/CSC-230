@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div id="google_translate_element"></div>
+    <div class = "header" ></div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/timeonsite/1.2.0/timeonsitetracker.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<title>Glazer Children's Museum</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #6dcff6;
+  }
+
+  .nav-container {
+    text-align: center;
+    padding: 20px;
+  }
+  .nav-container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .nav-button {
+  display: inline-block;
+  margin: 10px; /* Space between buttons */
+  padding: 20px 30px; /* Increase padding to make buttons larger */
+  background: #6a0dad;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px; /* Increase font size for larger text */
+  transition: background-color 0.5s;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Shadow for depth */
+}
+  .nav-button:hover {
+    background-color: #ddd;
+  }
+  
+
+  .main-content {
+    padding: 20px;
+    text-align: center;
+  }
+  .footer {
+    background: purple;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+  .footer button {
+    color: white;
+    background: #6a0dad;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .footer button:hover {
+    background-color: #7c29a3;
+  }
+  
+  
+  
+  @media (max-width: 600px) {
+      
+      .nav-button {
+            display: block; /* Stack the buttons vertically */
+            margin: 10px auto; /* Center buttons horizontally with auto margins */
+        }
+    
+        .content {
+            text-align: left; /* Align text to the left for readability on mobile */
+            padding: 0 20px; /* Add padding on the sides for mobile */
+        }
+        .nav-container {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        .header, .main-content, .footer, .footer button {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+  }
+  a.header-link { /* Added class for styling */
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url('{% static "1.png" %}') no-repeat center center;
+    background-size: cover;
+    padding-top: 25%; /* Responsive height relative to the width */
+    text-decoration: none; /* Removes underline from links */
+  }
+  .header-link:hover {
+    cursor: pointer; /* Optional: Changes the cursor on hover */
+  }
+  .frame {
+            background-color: white; /* Set background color to white */
+            padding: 30px; /* Add padding to create space inside the box */
+            border: 1px solid black; 
+            width: 70%; /* Adjust width as needed */
+            margin: 0 auto; /* Center horizontally */
+            margin-top: 20px; /* Add top margin to create space below header */
+        
+ }
+ .info {
+            color: dark;
+            text-align: center;
+            font-size: 38px;
+            margin: 0 auto;
+            max-width: 800px;
+            padding : 0 20px 20px;
+            font-family: GCMBase, Arial, sans-serif;
+    }
+  #map {
+            height: 400px;
+            width: 100%;
+        }
+ 
+
+  
+</style>
+</head>
+<body>
+<a href="{% url 'homepage_view' %}" class="header-link" aria-label="Header Link"></a>
+<div class="header-bar"></div>
+<div class="main-content">
+    <div class="frame">
+        <p class="info"><b>Play around the Bay</b></p>
+    <div id="map"></div>
+</div>
+    
+        
+<script>
+    function initMap() {
+        var centerLocation = {lat: 27.9506, lng: -82.4572}; // Tampa, FL as the center for example
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: centerLocation
+        });
+
+        var locations = [
+            {
+                lat: 27.9441,
+                lng: -82.4454,  // Florida Aquarium
+                title: 'Florida Aquarium',
+                content: '<h3>Florida Aquarium</h3><p>Continue exploring at the Florida Aquarium!</p><a href="https://www.flaquarium.org/" target="_blank">Visit Website</a>'
+            },
+            {
+                lat: 27.968544459045372, 
+                lng: -82.49221722192624, 
+                title: 'Anderson Playground',
+                content: '<h3>Anderson Playground</h3><p>Park</p>'
+            },
+            {
+                lat: 27.944964101140165,
+                lng: -82.45899836136556,
+                title: 'TampaRiverwalk ',
+                content: '<h3>Tampa Riverwalk</h3><p>Insert Text</p><a href="https://thetampariverwalk.com/" target="_blank">Visit Website</a>'
+            },
+            
+            {
+                lat: 28.014072870327425,
+                lng:-82.47003157708976, 
+                title: 'ZooTampa',
+                content: '<h3>Museum of Science and Industry</h3><p></p><a href="https://mosi.org/" target="_blank">Visit Website</a>'
+                
+            },
+            {
+                lat: 27.940469886308595,
+                lng: -82.45508755830403, 
+                title: 'Water Taxi',
+                content: '<h3>Tampa Bay Water Taxi<h3><p></p><a href="https://piratewatertaxi.com/" target="_blank">Visit Website</a>'
+                
+            },
+            // ... more locations
+        ];
+
+        // Create one InfoWindow that will be reused for each marker
+        // Create one InfoWindow that will be reused for each marker
+        var infoWindow = new google.maps.InfoWindow();
+
+        locations.forEach(function(location) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: location.title
+            });
+
+            // Reuse the single InfoWindow and set new content as needed
+            marker.addListener('click', function() {
+                infoWindow.setContent(location.content);
+                infoWindow.open(map, marker);
+            });
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9R-7jZ3764HM_1m1U70TJXVg2n3aw-Ec&callback=initMap"></script>
+<div class="footer">
+  <button onclick="location.href='https://72839.blackbaudhosting.com/72839/Annual-Fund'">Make a Donation</button>
+  <button onclick="location.href='https://glazermuseum.org/visit/#hours'">Hours of Operation</button>
+</div>
+    
+</body>
+</html>

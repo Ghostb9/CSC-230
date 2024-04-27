@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <div id="google_translate_element"></div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/timeonsite/1.2.0/timeonsitetracker.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <title>{{ html_page.title }}</title>
+{% if html_page.image %}
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            background-color:#6dcff6 ;
+        }
+
+        .header {
+            position: relative;
+            height: 30vh; /* Adjust height as needed */
+            background-image: url('{{ html_page.image.url }}'); /* Set the image as background */
+            background-size: cover; /* Make sure the background image covers the entire header */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            overflow: hidden; /* Prevent content from overflowing */
+        }
+
+        .home-button {
+            position: absolute;
+            top: 50px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: #6dcff6;
+            background-image: url('{% static "HomeButton.png" %}'); 
+            background-size: cover; 
+            background-repeat: no-repeat;
+            text-indent: -9999px;
+            color: transparent; /* Hide text */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .home-button:hover {
+            background-color: #9b51e0; 
+            transform: scale(1.1);
+        }
+        #words {
+            text-align: center;
+            font-size: 40px;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 5px;
+        }
+        .purpletext {
+            color: #9b51e0;
+            font-size: 30;
+            
+        }
+        .info {
+            color: dark;
+            text-align: center;
+            font-size: 18px;
+            margin: 0 auto;
+            max-width: 800px;
+            padding : 0 20px 20px;
+            font-family: GCMBase, Arial, sans-serif;
+        }
+        .title-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px; /* Add padding to the box */
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+            border: 2px solid black; /* Black border */
+            z-index: 2; /* Ensure box is above the image */
+        }
+
+        .title {
+            font-size: 36px; 
+            color: #000; /* Text color */
+            text-align: center;
+            margin: 0; /* Remove default margin */
+        }
+
+        .frame {
+            background-color: white; /* Set background color to white */
+            padding: 20px; /* Add padding to create space inside the box */
+            border: 1px solid black; 
+            width: 70%; /* Adjust width as needed */
+            margin: 0 auto; /* Center horizontally */
+            margin-top: 20px; /* Add top margin to create space below header */
+
+        
+        }
+
+        .text-box input[type="text"] {
+            width: 90%; /* Lengthen input box */
+            box-sizing: border-box; 
+            padding: 10px; /* Add padding to the input box */
+        }
+        .footer {
+            background: purple;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .footer button {
+            color: white;
+            background: #6a0dad;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }     
+        .footer button:hover {
+            background-color: #7c29a3;
+        }
+
+    </style>
+{% endif %}
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'homepage_view' %}">
+            <div class="home-button"></div>
+        </a>
+    </div>
+    <div class="frame">
+        <div id="words">
+            <p>{{ html_page.play_type }}<br> <span class="purpletext"><b>{{ html_page.title }}</b></span></p>
+        </div>
+        <p class="info"><b>{{ html_page.content|safe }}</p>
+    </div>
+    <div class ="frame">
+        <p class = "info">Extending the Play</p>
+        <p class="info">{{ html_page.additional_content|safe }}</p>
+    </div>
+    <div>
+        <p></p>
+    </div>
+    <div class="frame">
+    <form method="post" action="{% url 'submit_feedback' %}">
+        <p>Submit Your Email to Get More Information on Play!</p>
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <button type="submit">Submit</button>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+    </form>
+    </div>
+    <div>
+        <p></p>
+    </div>
+    <div class="footer">
+        <button onclick="location.href='https://72839.blackbaudhosting.com/72839/Annual-Fund'">Make a Donation</button>
+        <button onclick="location.href='https://glazermuseum.org/visit/#hours'">Hours of Operation</button>
+      </div>
+</body>
+</html> 

@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div id="google_translate_element"></div>
+    <div class = "header" ></div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/timeonsite/1.2.0/timeonsitetracker.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<title>Glazer Children's Museum</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #6dcff6;
+  }
+
+  .nav-container {
+    text-align: center;
+    padding: 20px;
+  }
+  .nav-container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .nav-button {
+  display: inline-block;
+  margin: 10px; /* Space between buttons */
+  padding: 20px 30px; /* Increase padding to make buttons larger */
+  background: #6a0dad;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px; /* Increase font size for larger text */
+  transition: background-color 0.5s;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Shadow for depth */
+}
+  .nav-button:hover {
+    background-color: #ddd;
+  }
+  
+  .tpa-container {
+    text-align: center;
+    padding: 20px;
+  }
+  .tpa-container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .tpa-button {
+  display: inline-block;
+  margin: 10px; /* Space between buttons */
+  padding: 20px 30px; /* Increase padding to make buttons larger */
+  background: #7c29a3;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px; /* Increase font size for larger text */
+  transition: background-color 0.5s;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Shadow for depth */
+}
+  .tpa-button:hover {
+    background-color: #ddd;
+  }
+  .main-content {
+    padding: 20px;
+    text-align: center;
+  }
+  .footer {
+    background: purple;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+  .footer button {
+    color: white;
+    background: #6a0dad;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .footer button:hover {
+    background-color: #7c29a3;
+  }
+  
+  
+  
+  @media (max-width: 600px) {
+      
+      .nav-button {
+            display: block; /* Stack the buttons vertically */
+            margin: 10px auto; /* Center buttons horizontally with auto margins */
+        }
+    
+        .content {
+            text-align: left; /* Align text to the left for readability on mobile */
+            padding: 0 20px; /* Add padding on the sides for mobile */
+        }
+        .nav-container {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        .header, .main-content, .footer, .footer button {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+  }
+  a.header-link { /* Added class for styling */
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url('{% static "1.png" %}') no-repeat center center;
+    background-size: cover;
+    padding-top: 25%; /* Responsive height relative to the width */
+    text-decoration: none; /* Removes underline from links */
+  }
+  .header-link:hover {
+    cursor: pointer; /* Optional: Changes the cursor on hover */
+  }
+  .frame {
+            background-color: white; /* Set background color to white */
+            padding: 30px; /* Add padding to create space inside the box */
+            border: 1px solid black; 
+            width: 70%; /* Adjust width as needed */
+            margin: 0 auto; /* Center horizontally */
+            margin-top: 20px; /* Add top margin to create space below header */
+        
+ }
+ .info {
+            color: dark;
+            text-align: center;
+            font-size: 45px;
+            margin: 0 auto;
+            max-width: 800px;
+            padding : 0 20px 20px;
+            font-family: GCMBase, Arial, sans-serif;
+    }
+ 
+
+  
+</style>
+</head>
+<body>
+<a href="{% url 'homepage_view' %}" class="header-link" aria-label="Header Link"></a>
+<div class="header-bar"></div>
+<div class="main-content">
+    <div class="frame">
+        <p class="info"><b>Types of Play!</b></p>
+        <div class="nav-container">
+            <button class="nav-button" onclick="toggleSection('physical')">Physical</button>
+            <button class="nav-button" onclick="toggleSection('social-emotional')">Social-emotional</button>
+            <button class="nav-button" onclick="toggleSection('sensory')">Sensory</button>
+            <button class="nav-button" onclick="toggleSection('cognitive')">Cognitive</button>
+            <button class="nav-button" onclick="toggleSection('communication')">Communication</button>
+        </div>
+
+        <div id="physical" class="content" style="display:none;">
+            <p>1) Gross motor movement: By making large movements with their hands, feet, and body while dancing, children learn their capabilities of moving their bodies around.</p>
+            <p>2) Fine motor skills: Playing with Legos and other building toys allow children to practice finer motor movements, like grasping a small object between their thumb and forefinger (a pincer grasp).</p>
+        </div>
+        <div id="social-emotional" class="content" style="display:none;">
+            <p>1) Theory of mind: Considering that different people know different things, and that just because you know something doesn’t mean everyone knows it is an important skill in perspective taking. You may observe theory of mind while playing games, when you have to consider the goals and desires of the other player when making your moves.</p>
+            <p>2) Empathy: Showing concern for others; if someone gets hurt, and your child helps them, they are showing empathy for that child’s pain.</p>
+            <p>3) Turn-taking: Most games involve taking turns. Knowing that you must follow an order of turns helps children learn to follow rules, an important part of living in a society.</p>
+        </div>
+        <div id="sensory" class="content" style="display:none;">
+            <p>1) Touch: Having the tactile feel of the wet paint as you finger-paint provides some children a good sensory feeling as they smear the paint around the canvas. Of course, some kids find this feeling unpleasant.</p>
+            <p>2) Vision: Children often gravitate towards a handful of certain colors as their favorite color (e.g., red and blue). If a child’s favorite color is red, they will usually gravitate towards a particular red, the one that most people would all agree is the “best” or more “representative” shade of red. This shade of red is referred to as red’s focal color. All colors have such a focal color—a shade that people agree is the best shade. Some vision scientists argue that these focal colors are a result of how the visual receptors for color in the eye (the cones) work together and are wired.</p>
+        </div>
+        <div id="cognitive" class="content" style="display:none;">
+            <p>1) Sorting: Children will commonly sort their toys and other items into different groups. This shows them considering the different dimensions and attributes that an object may possess. For instance, you may observe your child sorting their race cars by color or by speed, or perhaps sorting books by size or genre.</p>
+            <p>2) Episodic memory: At the end of their day, children will sometimes discuss what they did during the day. This is using episodic memory: retrieving from long-term memory past events (“episodes”). This can become a nice bed-time routine as you recollect these past moments.</p>
+            <p>3) Planning: Following instructions as a child builds a Lego or some other toy from parts requires sequencing the events in the proper order and making sure they have all the needed materials as they follow the steps.</p>
+        </div>
+        <div id="communication" class="content" style="display:none;">
+            <p>1) Wordplay: Children like rhyming words (think Dr. Seuss!). Creating rhymes requires phonemic awareness, the awareness that words are made up of individual sounds that are separable. These separable sounds are called phonemes. This phonemic awareness comes before a lot of other skills can be learned, including reading.</p>
+            <p>2) Metaphor: As children grow in their linguistic capabilities, they begin to use and understand metaphor, when the literal meaning of what you say doesn’t match what you truly mean. You see this when children get more sophisticated in their joke telling.</p>
+        </div>
+         <div class="tpa-container">
+            <a href="{% url 'tpa_play' %}" class="nav-button">Play in Tampa</a>
+        </div>
+
+        
+    </div>
+</div>
+
+<script>
+    function toggleSection(sectionId) {
+        // Hide all content
+        document.querySelectorAll('.content').forEach(function(content) {
+            content.style.display = 'none';
+        });
+        // Show the clicked content
+        var content = document.getElementById(sectionId);
+        content.style.display = 'block';
+    }
+</script>
+</body>
+
+<div class="footer">
+  <button onclick="location.href='https://72839.blackbaudhosting.com/72839/Annual-Fund'">Make a Donation</button>
+  <button onclick="location.href='https://glazermuseum.org/visit/#hours'">Hours of Operation</button>
+</div>
+
+</body>
+</html>

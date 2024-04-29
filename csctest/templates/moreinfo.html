@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div id="google_translate_element"></div>
+    <div class = "header" ></div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/timeonsite/1.2.0/timeonsitetracker.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<title>Glazer Children's Museum</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #6dcff6;
+  }
+er-bar {
+  background: purple;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  /* other styles as needed */
+  }
+  .nav-container {
+    text-align: center;
+    padding: 20px;
+  }
+  .nav-container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .nav-button {
+  display: inline-block;
+  margin: 10px; /* Space between buttons */
+  padding: 40px 60px; /* Increase padding to make buttons larger */
+  background: #6a0dad;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 24px; /* Increase font size for larger text */
+  transition: background-color 0.5s;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Shadow for depth */
+}
+  .nav-button:hover {
+    background-color: #ddd;
+  }
+  .main-content {
+    padding: 20px;
+    text-align: center;
+  }
+  .footer {
+    background: purple;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+  .footer button {
+    color: white;
+    background: #6a0dad;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .footer button:hover {
+    background-color: #7c29a3;
+  }
+  
+  @media (max-width: 600px) {
+    .nav-container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .header, .main-content, .footer, .footer button {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  a.header-link { /* Added class for styling */
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url('{% static "1.png" %}') no-repeat center center;
+    background-size: cover;
+    padding-top: 25%; /* Responsive height relative to the width */
+    text-decoration: none; /* Removes underline from links */
+  }
+  .header-link:hover {
+    cursor: pointer; /* Optional: Changes the cursor on hover */
+  }
+  .frame {
+            background-color: white; /* Set background color to white */
+            padding: 30px; /* Add padding to create space inside the box */
+            border: 1px solid black; 
+            width: 70%; /* Adjust width as needed */
+            margin: 0 auto; /* Center horizontally */
+            margin-top: 20px; /* Add top margin to create space below header */
+    }
+
+</style>
+</head>
+<body>
+<a href="{% url 'homepage_view' %}" class="header-link" aria-label="Header Link"></a>
+<div class="header-bar"></div>
+<div class="main-content">
+    <div class="frame">
+        <!-- First frame content goes here -->
+        
+        <p>
+            <a href="https://www.vroom.org/">Vroom</a><br>
+            Explore Vroom's collection of engaging activities designed to spark your child's curiosity and promote early learning development.
+        </p>
+        <p>
+            <a href="https://glazermuseum.org/visit">Plan your visit</a><br>
+            There’s something new to discover with each visit to Glazer Children’s Museum. Play pretend in your favorite signature exhibits and discover new worlds in our traveling exhibits.
+        </p>
+        <p>
+            <a href="https://glazermuseum.org/memberships/">Membership</a><br>
+            Support GCM by becoming a member today and enjoy a full year of imagination and discovery! 
+        </p>
+        <p>
+            <a href="https://glazermuseum.org/financialaccess/">Financial Access</a><br>
+            GCM believes that every child deserves a fun, safe, and inclusive space for imagination and discovery. Our financial access programs provide families and schools in need with access to museum admission, play sessions, field trips, and camps at little-to-no cost.
+        </p>
+        <p>
+            <a href="{% url 'feedback' %}">Feedback Form</a>
+        </p>
+    </div>
+
+<div class="footer">
+  <button onclick="location.href='https://72839.blackbaudhosting.com/72839/Annual-Fund'">Make a Donation</button>
+  <button onclick="location.href='https://glazermuseum.org/visit/#hours'">Hours of Operation</button>
+</div>
+
+</body>
+</html>
